@@ -3,11 +3,13 @@ import {useNavigate} from 'react-router-dom'
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { authDataContext } from "../Context/authContext.jsx";
 import axios from "axios";
+import { userDataContext } from "../Context/UserContext.jsx";
 const Signup = () => {
   let Navigate = useNavigate();
   const {serverUrl} = useContext(authDataContext);
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
+  let {userData,setUserData}=useContext(userDataContext)
   let [password, setPassword] = useState("");
    const handleSignUp=async(e)=>{
     try {
@@ -17,7 +19,9 @@ const Signup = () => {
       email,
       password ,
       },{withCredentials: true});
-      console.log(result);
+       setUserData(result.data)
+       Navigate("/")    
+       console.log(result);
     } catch (error) {
       console.error("Error during signup:", error);
     }

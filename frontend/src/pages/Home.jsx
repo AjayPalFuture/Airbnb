@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Nav from '../Component/Nav.jsx'
 const Home = () => {
   return (
-    <div className='text-red-500 text-3xl font-bold text-center mt-10'>
-       Home Route
+    <div >
+   <Nav/>
     </div>
   )
 }
