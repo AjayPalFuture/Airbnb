@@ -26,18 +26,19 @@ const Nav = () => {
 
   const handleLogOut = async () => {
     try {
-      let result = await axios.post(serverUrl + "/api/auth/logout", {
+      let result = await axios.post(serverUrl + "/api/auth/logout", {},{
         withCredentials: true,
       });
       setUserData(null);
       console.log(result);
+      
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div>
+    <div className="fixed top-0">
       <div className="w-[100vw] min-h-[80px]  border-b-[1px] border-[#dcdcdc] px-[40px] flex items-center justify-between md:px-[40px]">
         <div>
           <img src={logo} alt="" className="w-[130px]" />
@@ -54,7 +55,7 @@ const Nav = () => {
           </button>
         </div>
         <div className="flex items-center justify-center gap-[10px] relative">
-          <span className="text-[18px] cursor-pointer rounded-[50px] hover:bg-[#ded9d9] px-[8px] py-[5px] md:block hidden">
+          <span className="text-[18px] cursor-pointer rounded-[50px] hover:bg-[#ded9d9] px-[8px] py-[5px] md:block hidden" onClick={()=>navigate("/listingpage1")}>
             List Your Home
           </span>
           <button
@@ -78,20 +79,20 @@ const Nav = () => {
           {showpopup && (
             <div className="w-[220px] h-[250px] absolute bg-slate-50 top-[110%] right-[5%] md:right-[10%] border-[1px] border-[#aaa9a9] z-10 rounded-lg">
               <ul className="w-[100%] h-[100%] text-[17px] flex items-start justify-around flex-col py-[10px]">
-                <li
+               {!userData && <li
                   className="w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer"
-                  onClick={() => navigate("/login")}
+                  onClick={() => {navigate("/login"); setShowpopup(false) }}
                 >
                   Login
-                </li>
-                <li
+                </li>}
+                {userData && <li
                   className="w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer"
-                  onClick={handleLogOut}
+                  onClick={()=>{handleLogOut();setShowpopup(false)}}
                 >
                   Logout
-                </li>
+                </li>}
                 <div className="w-[100%] h-[1px] bg-[#c1c0c0]"></div>
-                <li className="w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer">
+                <li className="w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer" onClick={()=>{navigate("/listingpage1");setShowpopup(false)}}>
                   List your Home
                 </li>
                 <li className="w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer">

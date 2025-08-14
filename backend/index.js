@@ -5,6 +5,7 @@ import authRouter from './route/auth_route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import userRouter from './route/user_route.js';
+import listingRouter from './route/lising.route.js';
 
 dotenv.config();
 const port=process.env.PORT || 5000
@@ -19,6 +20,10 @@ app.use(cors({
 
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
+app.use("/api/listing",listingRouter)
+// index.js ya server.js me
+app.use(express.static('public'));
+
 
 app.listen(port,()=>{
     connectDB();

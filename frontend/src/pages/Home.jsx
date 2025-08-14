@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Nav from '../Component/Nav.jsx'
-const Home = () => {
+const Home = () =>{
   return (
     <div >
-   <Nav/>
+         <Nav/>
     </div>
   )
 }

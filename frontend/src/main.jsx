@@ -3,16 +3,18 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import AuthContext from "./Context/authContext.jsx";
+import AuthContext from "./Context/AuthContext.jsx";
 import UserContext from "./Context/UserContext.jsx";
+import ListingContext from "./Context/ListingContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AuthContext>
-      <UserContext>
-
-      <App />
-      </UserContext>
+      <ListingContext>
+        <UserContext>
+          <App />
+        </UserContext>
+      </ListingContext>
     </AuthContext>
   </BrowserRouter>
 );

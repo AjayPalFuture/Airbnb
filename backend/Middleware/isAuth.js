@@ -1,19 +1,50 @@
-import jwt from 'jsonwebtoken';
+// import jwt from "jsonwebtoken";
 
-const isAuth= async (req,res,next) => {
+// const isAuth = (req, res, next) => {
+//     try {
+//         const token = req.cookies.token; // cookie-parser se
+//         if (!token) {
+//             return res.status(401).json({ message: "No token, authorization denied" });
+//         }
+
+//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//         req.userId = decoded.userId; // token se userId nikalo
+//         next();
+//     } catch (error) {
+//         return res.status(401).json({ message: "Invalid token" });
+//     }
+// };
+
+// export default isAuth;
+
+
+
+
+import jwt from "jsonwebtoken";
+
+const isAuth = (req, res, next) => {
     try {
-        let {token} = req.cookies;
-        if(!token){
-             res.status(401).json({message:"Unauthorized access"});
+        // JWT cookie ka naam "token" rakha hai
+        const token = req.cookies.token;
+
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized: No token found" });
         }
-        let verifyToken= jwt.verify(token, process.env.JWT_SECRET);
-        if(!verifyToken){
-             res.status(401).json({message:"User  doesn't have a token"});
+
+        // Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        if (!decoded.userId) {
+            return res.status(401).json({ message: "Unauthorized: Invalid token" });
         }
-        req.userId= verifyToken.userId;
+
+        // Set userId in request for later use
+        req.userId = decoded.userId;
         next();
     } catch (error) {
-        res.status(500).json({message:"isAuth", error: error.message}); 
+        console.error("Auth Error:", error);
+        res.status(401).json({ message: "Unauthorized: Invalid or expired token" });
     }
-}
+};
+
 export default isAuth;

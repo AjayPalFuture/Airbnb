@@ -25,7 +25,7 @@ const UserContext = ({children}) => {
     <div>
       <userDataContext.Provider value={value}>
           {children}
-22      </userDataContext.Provider>
+     </userDataContext.Provider>
     </div>
   )
 }
