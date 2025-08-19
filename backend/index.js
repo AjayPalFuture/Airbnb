@@ -22,7 +22,7 @@ app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 app.use("/api/listing",listingRouter)
 // index.js ya server.js me
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 
 app.listen(port,()=>{

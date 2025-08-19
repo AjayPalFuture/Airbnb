@@ -24,7 +24,7 @@ const Signup = () => {
       setLoading(false)
        setUserData(result.data)
        Navigate("/")    
-       console.log(result);
+      //  console.log(result);
     } catch (error) {
       setLoading(false)
       console.error("Error during signup:", error);

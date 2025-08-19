@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 export const signUp=async (req,res)=>{
     try {
         let {name,email,password}=req.body
-        const existUser=await User.findOne({ email})
+        const existUser=await User.findOne({ email}).populate("listing")
         if(existUser){
             return res.status(400).json({message:"User already exists"})
         }
@@ -33,7 +33,7 @@ export const signUp=async (req,res)=>{
 export const login=async (req,res)=>{
     try {
          let {email,password}=req.body
-        const user=await User.findOne({ email})
+        const user=await User.findOne({ email}).populate("listing")
         if(!user){
             return res.status(400).json({message:"User is not exists"})
         }

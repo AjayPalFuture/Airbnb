@@ -3,11 +3,11 @@ import { authDataContext } from './authContext.jsx'
 import axios from 'axios'
 export const userDataContext=createContext()
 const UserContext = ({children}) => {
-  let {serverurl}=useContext(authDataContext)
+  let {serverUrl}=useContext(authDataContext)
   let [userData,setUserData]=useState(null)
   const getCurrentUser= async()=>{
     try {
-      let result=await axios.get(serverurl+"/api/user/currentuser",{withCredentials:true})
+      let result=await axios.get(serverUrl+"/api/user/currentuser",{withCredentials:true})
       setUserData(result.data)
     } catch (error) {
       setUserData(null)

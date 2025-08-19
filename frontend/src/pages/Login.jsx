@@ -8,11 +8,11 @@ import { userDataContext } from "../Context/UserContext.jsx";
 const Login = () => {
   const navigate = useNavigate();
   const { serverUrl, loading, setLoading } = useContext(authDataContext);
-  const { userData, setUserData } = useContext(userDataContext);
+  const { userData, setUserData } = useContext
+  (userDataContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleLogin = async (e) => {
     e.preventDefault(); // prevent default first
     setLoading(true);
@@ -23,15 +23,14 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-
+       setLoading(false)
       setUserData(result.data.user);
       navigate("/");
-      console.log(result.data);
+      // console.log(result.data);
     } catch (error) {
+      setLoading(false)
       console.error("Error during login:", error);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   return (

@@ -7,33 +7,20 @@ const ListingPage3 = () => {
   let navigate = useNavigate();
 
   let {
-    title,
-    setTitle,
-    description,
-    setDescription,
-    frontEndImage1,
-    setFrontEndImage1,
-    frontEndImage2,
-    setFrontEndImage2,
-    frontEndImage3,
-    setFrontEndImage3,
-    backEndImage1,
-    setBackEndImage1,
-    backEndImage2,
-    setBackEndImage2,
-    backEndImage3,
-    setBackEndImage3,
-    rent,
-    setRent,
-    city,
-    setCity,
-    landMark,
-    setLandMark,
-    category,
-    setCategory,
+    title, setTitle,
+    description, setDescription,
+    frontEndImage1, setFrontEndImage1,
+    frontEndImage2, setFrontEndImage2,
+    frontEndImage3,setFrontEndImage3,
+    backEndImage1,setBackEndImage1,
+    backEndImage2, setBackEndImage2,
+    backEndImage3, setBackEndImage3,
+    rent,setRent,
+    city, setCity,
+    landMark, setLandMark,
+    category, setCategory,
     handleAddListing,
-    adding,
-    setAdding,
+    adding,setAdding,
   } = useContext(ListingDataContext);
   return (
     <div className="w-[100%] h-[100vh] bg-[white] flex items-center justify-center gap-[10px] flex-col overflow-auto relative">
@@ -72,7 +59,7 @@ const ListingPage3 = () => {
       </div>
       <div className="w-[100%] h-[50px] flex items-center justify-start px-[150px]">
         <button
-          className="px-[50px] py-[10px] bg-[red] text-white text-[18px] md:px-[100px] rounded-lg"
+          className="px-[50px] py-[10px] bg-[red] text-white text-[18px] md:px-[100px] rounded-lg text-nowrap"
           onClick={handleAddListing}
           disabled={adding}
         >

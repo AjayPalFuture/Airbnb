@@ -4,7 +4,7 @@ export const authDataContext = createContext();
 
 function AuthContext({ children }) {
   let serverUrl = "http://localhost:1000";
-  const[loading,setLoading]=useState(false)
+  let [loading,setLoading]=useState(false)
 
   // userData ko manage karne ke liye state
   const [userData, setUserData] = useState({
