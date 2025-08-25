@@ -1,29 +1,22 @@
+import jwt from "jsonwebtoken"
+const isAuth = async (req,res,next) => {
 
-import jwt from "jsonwebtoken";
-
-const isAuth = (req, res, next) => {
     try {
-        // JWT cookie ka naam "token" rakha hai
-        const token = req.cookies.token;
-
-        if (!token) {
-            return res.status(401).json({ message: "Unauthorized: No token found" });
+        let {token} = req.cookies
+        if(!token){
+            res.status(400).json({message:"user doesn't have a token"})
         }
-
-        // Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        if (!decoded.userId) {
-            return res.status(401).json({ message: "Unauthorized: Invalid token" });
+        let verifyToken = jwt.verify(token,process.env.JWT_SECRET)
+        if(!verifyToken){
+            res.status(400).json({message:"user doesn't have a Validtoken"})
         }
+        req.userId = verifyToken.userId
+        next()
 
-        // Set userId in request for later use
-        req.userId = decoded.userId;
-        next();
     } catch (error) {
-        console.error("Auth Error:", error);
-        res.status(401).json({ message: "Unauthorized: Invalid or expired token" });
+        res.status(500).json({message:`isAuth error ${error}`})
+        
     }
-};
-
-export default isAuth;
+    
+}
+export default isAuth

@@ -1,30 +1,21 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react'
+export const authDataContext = createContext()
+function AuthContext({children}) {
+    const serverUrl = "http://localhost:1000"
 
-export const authDataContext = createContext();
+    let [loading,setLoading]=useState(false)
 
-function AuthContext({ children }) {
-  let serverUrl = "http://localhost:1000";
-  let [loading,setLoading]=useState(false)
-
-  // userData ko manage karne ke liye state
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-  });
-
-  let value = {
-    serverUrl,
-    userData,
-    setUserData,
-    loading,
-    setLoading
-  };
-
+    let value={
+        serverUrl,
+        loading,setLoading
+    }
   return (
-    <authDataContext.Provider value={value}>
-      {children}
-    </authDataContext.Provider>
-  );
+    <div>
+     <authDataContext.Provider value={value}>
+        {children}
+     </authDataContext.Provider>
+    </div>
+  )
 }
 
-export default AuthContext;
+export default AuthContext
